@@ -12,6 +12,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 :root {
     --Pale-gray: #EFF5FF;
+    --Light-gray: #D6D9E6;
+    --Light-blue-gray: #F8F9FF;
     --Blue-gray: #9699AA;
     --Light-blue: #BEE2FD;
     --Med-blue: #6259FF;
@@ -42,9 +44,10 @@ main {
     padding: .75rem;
     height: 80vh;
     width: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     background-color: var(--White);
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+    transition: max-width ease-in .1s;
 }
 
 /* Nav */
@@ -68,6 +71,7 @@ nav .steps {
     width: fit-content;
     margin: auto;
     padding-top: 2rem;
+    transition: height ease-in .125s;
 }
 
 nav .step {
@@ -102,6 +106,7 @@ nav .circle {
 nav .step:hover > .text {
     color: var(--Light-blue);
 }
+
 /* Panels */
 .panels {
     display: flex;
@@ -137,29 +142,31 @@ nav .step:hover > .text {
 .panel-nav .previous {
     color: var(--Btn-blue);
 }
+
 .panel-nav .previous:hover {
     cursor: pointer;
     color: var(--Navy-blue);
 }
 
-/* Info-panel */
-.info-panel {
-    /* background-color: rgb(245, 190, 223); */
-}
-.info-panel h2 {
+.info-panel h2, .select-panel h2, .addons-panel .title h2 {
     padding-top: 2rem;  
     padding-bottom: .5rem;
     font-size: 2rem;
     font-weight: 600;
+    transition: padding-top ease-in .125s;
 }
-.info-panel p {
+
+.info-panel p, .select-panel p, .addons-panel .title p {
     color: var(--Blue-gray);
     padding-bottom: 2rem;
 }
+
+/* Info-panel */
 .info-panel form {
     display: flex;
     flex-direction: column;
 }
+
 .info-panel form input {
     border: 1px solid var(--Blue-gray);
     border-radius: .25rem;
@@ -168,8 +175,177 @@ nav .step:hover > .text {
     margin-bottom: 1.5rem;
 }
 
+/* Select Panel */
+
+.selection {
+    display: grid;
+    grid-gap: .75rem;
+    margin: 0 auto;
+    max-width: 60em;
+    padding: 0;
+}
+
+.selection {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.annual-toggle {
+    background-color: var(--Light-blue-gray);
+    border-radius: .75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.annual-toggle h5 {
+    color: var(--Blue-gray);
+}
+
+.toggle {
+    position: relative;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  .toggle input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+  }
+  .toggle label {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .toggle label:before {
+    content: '';
+    width: 70px;
+    height: 32px;
+    background: var(--Blue-gray);
+    position: relative;
+    display: inline-block;
+    border-radius: 36px;
+    transition: 0.15s ease-in;
+  }
+  .toggle label:after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    left: 0;
+    top: -5px;
+    z-index: 2;
+    background: var(--White);
+    box-shadow: 0 0 5px #0002;
+    transition: 0.15s ease-in;
+  }
+  .toggle input[type="checkbox"]:hover + label:after  {
+      box-shadow: 0 2px 15px 0 #0002, 0 3px 8px 0 #0001;
+  }
+  .toggle input[type="checkbox"]:checked + label:after {
+    left: 40px;
+  }
+
+/* Start Select Panel - Radio Button */
+.radio, .checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.card_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid var(--Blue-gray);
+    border-radius: .75rem;
+    height: 175px;
+    padding: 1rem;
+}
+
+.card_body:hover {
+    cursor: pointer;
+}
+
+.card_body h6 {
+    font-weight: 500;
+    padding-bottom: .25rem;
+}
+
+.card_body p {
+    padding-bottom: 0;
+    font-size: .95rem;
+}
+
+.radio:checked ~ .card_body {
+    border-color: var(--Med-blue);
+    background-color: var(--Light-blue-gray);
+}
+/* End Select Panel - Radio Button */
+
+/* Add-ons Panel */
+.addons-panel .checkbox_card_body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: none;
+    cursor: pointer;
+    border: 2px solid var(--Light-gray);
+    padding: 1.25rem 1.75rem;
+    border-radius: .75rem;
+}
+
+.addons-panel .checkbox_card_body > .left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.addons-panel .checkbox_card_body > .left h2 {
+    font-weight: 500;
+    padding-bottom: .75rem;
+    font-size: 1.1rem;
+}
+
+.addons-panel .checkbox_card_body > .left p {
+    font-size: .95rem;
+    color: var(--Blue-gray);
+}
+
+.addons-panel .radio:checked ~ .checkbox_card_body {
+    border-color: var(--Med-blue);
+    background-color: var(--Light-blue-gray);
+}
+.addons-panel .checkbox {
+    height: 25px;
+    width: 25px;
+    border: 2px solid var(--Light-gray);
+    border-radius: .35rem;
+}
+
+.addons-panel .radio:checked ~ .checkbox_card_body > .left .checkbox {
+    background-image: url(./assets/images/icon-checkmark.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-size: 15px;
+    background-color: blue;
+    border-color: blue;
+}
+
+.addons-panel .price {
+    color: blue;
+}
+
 /* Media Queries */
-@media (max-height: 600px) {
+@media (max-height: 680px) {
     nav .steps {
         height: 80%;
     }
@@ -177,7 +353,7 @@ nav .step:hover > .text {
         min-height: 150px;
     }
     /* Info Panel */
-    .info-panel, nav {
+    .info-panel, nav, .select-panel, .addons-panel {
         overflow: auto;
         min-height: 50px;
     }
@@ -191,5 +367,11 @@ nav .step:hover > .text {
     .info-panel form input {
         margin-top: .25rem;
         margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 1400px) {
+    .container {
+        max-width: 900px;
     }
   }

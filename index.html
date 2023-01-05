@@ -61,7 +61,7 @@
                 </div>
             </nav>
             <div class="panels">
-                <div class="info-panel">
+                <div class="info-panel" style="display: none;">
                     <div class="content">
                         <h2>Personal Info</h2>
                         <p>Please provide your name, email address, and phone number.</p>
@@ -73,6 +73,119 @@
                             <label for="phone">Phone Number:</label>
                             <input id="phone" type="phone" placeholder="(604)555-1234" required>
                         </form>
+                    </div>
+                </div>
+                <div class="select-panel" style="display: none;">
+                    <div class="content">
+                        <h2>
+                            Select your plan
+                        </h2>
+                        <p>
+                            You have the option of monthly or yearly billing.   
+                        </p>
+                        <label class="selection">
+                            <label class="card">
+                                <input name="radio" class="radio" type="radio" checked>
+                                <div class="card_body">
+                                    <div class="icon">
+                                        <img src="./assets/images/icon-arcade.svg" alt="Arcade Icon">
+                                    </div>
+                                    <div class="text">
+                                        <h6>Arcade</h6>
+                                        <p>$9/month</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="card">
+                                <input name="radio" class="radio" type="radio">
+                                <div class="card_body">
+                                    <div class="icon">
+                                        <img src="./assets/images/icon-advanced.svg" alt="Controler Icon">
+                                    </div>
+                                    <div class="text">
+                                        <h6>Advanced</h6>
+                                        <p>$12/month</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="card">
+                                <input name="radio" class="radio" type="radio">
+                                <div class="card_body">
+                                    <div class="icon">
+                                        <img src="./assets/images/icon-pro.svg" alt="Controler Icon">
+                                    </div>
+                                    <div class="text">
+                                        <h6>Pro</h6>
+                                        <p>$15/month</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </label>
+                        </div>
+                        <div class="annual-toggle">
+                            <h5>Monthly</h5>
+                            <div class="toggle">
+                                <input type="checkbox"/>
+                                <label></label>
+                            </div>
+                            <h5>Yearly</h5>
+                        </div>
+                </div>
+                <div class="addons-panel">
+                    <div class="content">
+                        <div class="title">
+                            <h2>
+                                Pick add-ons
+                            </h2>
+                            <p>
+                                Add-ons help enhance your gaming experience.  
+                            </p>
+                        </div>
+                        <label class="card">
+                            <input name="checkbox" class="radio" type="checkbox" checked>
+                            <div class="checkbox_card_body">
+                                <div class="left">
+                                    <div class="checkbox"></div>
+                                    <div class="description">
+                                        <h2>Online service</h2>
+                                        <p>Access to multiplayer games</p>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <h6>+$1/mo</h6>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="card">
+                            <input name="checkbox" class="radio" type="checkbox" checked>
+                            <div class="checkbox_card_body">
+                                <div class="left">
+                                    <div class="checkbox"></div>
+                                    <div class="description">
+                                        <h2>Larger storage</h2>
+                                        <p>Extra 1TB of cloud save</p>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <h6>+$2/mo</h6>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="card">
+                            <input name="checkbox" class="radio" type="checkbox" checked>
+                            <div class="checkbox_card_body">
+                                <div class="left">
+                                    <div class="checkbox"></div>
+                                    <div class="description">
+                                        <h2>Customizable profile</h2>
+                                        <p>Custom theme on your profile</p>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <h6>+$2/mo</h6>
+                                </div>
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div class="panel-nav">
