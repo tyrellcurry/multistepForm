@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Step Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+        <div class="container">
+            <nav>
+                <div class="steps">
+                    <div class="step">
+                        <div class="number">
+                            <div class="circle">
+                                1
+                            </div>
+                        </div>
+                        <div class="text">
+                            <h6>Step 1</h6>
+                            <p>Your Info</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="number">
+                            <div class="circle">
+                                2
+                            </div>
+                        </div>
+                        <div class="text">
+                            <h6>Step 2</h6>
+                            <p>Select Plan</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="number">
+                            <div class="circle">
+                                3
+                            </div>
+                        </div>
+                        <div class="text">
+                            <h6>Step 3</h6>
+                            <p>Add-Ons</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="number">
+                            <div class="circle">
+                                4
+                            </div>
+                        </div>
+                        <div class="text">
+                            <h6>Step 4</h6>
+                            <p>Summary</p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="panels">
+                <div class="info-panel">
+                    <div class="content">
+                        <h2>Personal Info</h2>
+                        <p>Please provide your name, email address, and phone number.</p>
+                        <form action="">
+                            <label for="name">Name:</label>
+                            <input id="name" type="text" placeholder="Vanessa Mint" required>
+                            <label for="email">Email:</label>
+                            <input id="email" type="email" placeholder="vanessamint@email.com" required>
+                            <label for="phone">Phone Number:</label>
+                            <input id="phone" type="phone" placeholder="(604)555-1234" required>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel-nav">
+                    <div class="previous">
+                        Go Back
+                    </div>
+                    <button class="next">
+                        Next Step
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+  </body>
+</html>
