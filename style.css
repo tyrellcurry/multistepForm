@@ -19,6 +19,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     --Med-blue: #6259FF;
     --Btn-blue: #164A8A;
     --Navy-blue: #022959;
+    --Purple: #483EFF;
     --White: #ffffff;
 }
 
@@ -139,6 +140,14 @@ nav .step:hover > .text {
     background-color: var(--Navy-blue);
 }
 
+.panel-nav button.confirm {
+    background-color: var(--Med-blue);
+}
+
+.panel-nav button.confirm:hover {
+    background-color: var(--Btn-blue);
+}
+
 .panel-nav .previous {
     color: var(--Btn-blue);
 }
@@ -148,7 +157,7 @@ nav .step:hover > .text {
     color: var(--Navy-blue);
 }
 
-.info-panel h2, .select-panel h2, .addons-panel .title h2 {
+.info-panel h2, .select-panel h2, .addons-panel .title h2, .summary-panel .title h2 {
     padding-top: 2rem;  
     padding-bottom: .5rem;
     font-size: 2rem;
@@ -156,7 +165,7 @@ nav .step:hover > .text {
     transition: padding-top ease-in .125s;
 }
 
-.info-panel p, .select-panel p, .addons-panel .title p {
+.info-panel p, .select-panel p, .addons-panel .title p, .summary-panel .title p {
     color: var(--Blue-gray);
     padding-bottom: 2rem;
 }
@@ -326,6 +335,7 @@ nav .step:hover > .text {
 .addons-panel .checkbox {
     height: 25px;
     width: 25px;
+    min-width: 25px;
     border: 2px solid var(--Light-gray);
     border-radius: .35rem;
 }
@@ -344,8 +354,84 @@ nav .step:hover > .text {
     color: blue;
 }
 
+/* Summary Panel */
+.summary-panel .summary {
+    background-color: var(--Light-blue-gray);
+    padding: 1rem 1.5rem;
+    border-radius: .75rem;
+}
+
+.summary-panel .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-panel hr {
+    margin-top: 1.25rem;
+    margin-bottom: 1rem;
+    height: 1px;
+    background-color: var(--Blue-gray);
+    border: none;
+}
+
+.summary-panel .top .left h3 {
+    font-weight: 500;
+    padding-bottom: .5rem;
+}
+
+.summary-panel .top .left .change {
+    font-size: .95rem;
+    color: var(--Blue-gray);
+    text-decoration: underline;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.summary-panel .top .left .change:hover {
+    color: var(--Btn-blue);
+}
+
+.summary-panel .top .right h4 {
+    font-weight: 500;
+}
+
+.summary-panel .bottom .row:first-child {
+    padding-bottom: .85rem;
+}
+
+.summary-panel .bottom .row:last-child {
+    padding-bottom: .5rem;
+}
+
+.summary-panel .bottom p {
+    font-size: .95rem;
+    color: var(--Blue-gray);
+}
+
+.summary-panel .bottom h5 {
+    font-weight: 500;
+}
+
+.summary-panel .total {
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.summary-panel .total p {
+    color: var(--Blue-gray);
+}
+
+.summary-panel .total h3 {
+    font-weight: 500;
+    color: var(--Purple);
+    font-size: 1.25rem;
+}
+
+
 /* Media Queries */
-@media (max-height: 680px) {
+@media (max-height: 760px) {
     nav .steps {
         height: 80%;
     }
