@@ -11,10 +11,10 @@
   </head>
   <body>
     <main>
-        <div class="container">
+        <div x-data="{ activeTab: 'stepOne', steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false}" x-init="console.log(steps)" class="container">
             <nav>
                 <div class="steps">
-                    <div class="step">
+                    <div x-on:click="activeTab = 'stepOne'" x-bind:class="activeTab === 'stepOne' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 1
@@ -25,7 +25,7 @@
                             <p>Your Info</p>
                         </div>
                     </div>
-                    <div class="step">
+                    <div x-on:click="activeTab = 'stepTwo'" x-bind:class="activeTab === 'stepTwo' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 2
@@ -36,7 +36,7 @@
                             <p>Select Plan</p>
                         </div>
                     </div>
-                    <div class="step">
+                    <div x-on:click="activeTab = 'stepThree'" x-bind:class="activeTab === 'stepThree' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 3
@@ -47,7 +47,7 @@
                             <p>Add-Ons</p>
                         </div>
                     </div>
-                    <div class="step">
+                    <div x-on:click="activeTab = 'stepFour'" x-bind:class="activeTab === 'stepFour' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 4
@@ -61,7 +61,7 @@
                 </div>
             </nav>
             <div class="panels">
-                <div class="info-panel" style="display: none;">
+                <div x-show="activeTab === 'stepOne'" class="info-panel">
                     <div class="content">
                         <h2>Personal Info</h2>
                         <p>Please provide your name, email address, and phone number.</p>
@@ -74,8 +74,15 @@
                             <input id="phone" type="phone" placeholder="(604)555-1234" required>
                         </form>
                     </div>
+                    <div class="validation-toggle">
+                        <h3>Toggle Form Validation</h3>
+                        <div class="toggle">
+                            <input type="checkbox"/>
+                            <label></label>
+                        </div>
+                    </div>
                 </div>
-                <div class="select-panel" style="display: none;">
+                <div x-show="activeTab === 'stepTwo'" class="select-panel">
                     <div class="content">
                         <h2>
                             Select your plan
@@ -85,7 +92,7 @@
                         </p>
                         <label class="selection">
                             <label class="card">
-                                <input name="radio" class="radio" type="radio" checked>
+                                <input name="radio" class="radio" type="radio">
                                 <div class="card_body">
                                     <div class="icon">
                                         <img src="./assets/images/icon-arcade.svg" alt="Arcade Icon">
@@ -97,7 +104,7 @@
                                 </div>
                             </label>
                             <label class="card">
-                                <input name="radio" class="radio" type="radio">
+                                <input name="radio" class="radio" type="radio" checked>
                                 <div class="card_body">
                                     <div class="icon">
                                         <img src="./assets/images/icon-advanced.svg" alt="Controler Icon">
@@ -131,7 +138,7 @@
                             <h5>Yearly</h5>
                         </div>
                 </div>
-                <div class="addons-panel" style="display: none;">
+                <div x-show="activeTab === 'stepThree'" class="addons-panel">
                     <div class="content">
                         <div class="title">
                             <h2>
@@ -142,7 +149,7 @@
                             </p>
                         </div>
                         <label class="card">
-                            <input name="checkbox" class="radio" type="checkbox" checked>
+                            <input name="checkbox" class="radio" type="checkbox">
                             <div class="checkbox_card_body">
                                 <div class="left">
                                     <div class="checkbox"></div>
@@ -157,7 +164,7 @@
                             </div>
                         </label>
                         <label class="card">
-                            <input name="checkbox" class="radio" type="checkbox" checked>
+                            <input name="checkbox" class="radio" type="checkbox">
                             <div class="checkbox_card_body">
                                 <div class="left">
                                     <div class="checkbox"></div>
@@ -172,7 +179,7 @@
                             </div>
                         </label>
                         <label class="card">
-                            <input name="checkbox" class="radio" type="checkbox" checked>
+                            <input name="checkbox" class="radio" type="checkbox">
                             <div class="checkbox_card_body">
                                 <div class="left">
                                     <div class="checkbox"></div>
@@ -188,14 +195,14 @@
                         </label>
                     </div>
                 </div>
-                <div class="summary-panel">
+                <div x-show="activeTab === 'stepFour'" class="summary-panel">
                     <div class="content">
                         <div class="title">
                             <h2>
-                                Pick add-ons
+                                Finishing up
                             </h2>
                             <p>
-                                Add-ons help enhance your gaming experience.  
+                                Double-check everything looks OK before confirming.
                             </p>
                         </div>
                         <div class="summary">
@@ -203,7 +210,7 @@
                                 <div class="row">
                                     <div class="left">
                                         <h3>Arcade (Monthly)</h3>
-                                        <div class="change">Change</div>
+                                        <div @click="popUp = true" class="change">Change</div>
                                     </div>
                                     <div class="right">
                                         <h4>$9/mo</h4>
@@ -231,15 +238,53 @@
                     </div>
                 </div>
                 <div class="panel-nav">
-                    <div class="previous">
+                    <div
+                    @click="
+                    if(steps[steps.indexOf(activeTab) - 1] !== undefined){
+                    activeTab = steps[steps.indexOf(activeTab) - 1];
+                    }
+                    "
+                    x-show="activeTab !== 'stepOne'"
+                    class="previous">
                         Go Back
                     </div>
-                    <button class="next">
+                    <button
+                    @click="
+                    if(steps[steps.indexOf(activeTab) + 1] !== undefined){
+                    activeTab = steps[steps.indexOf(activeTab) + 1]
+                    }
+                    " 
+                    class="next">
                         Next Step
                     </button>
+                </div>
+                <div x-show="popUp" class="annual-modal">
+                    <div @click="popUp = false"  class="close">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h2>Change Payment Option</h2>
+                        <div class="annual-toggle">
+                            <h5>Monthly</h5>
+                            <div class="toggle">
+                                <input type="checkbox"/>
+                                <label></label>
+                            </div>
+                            <h5>Yearly</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        const formValidation = () => {
+            const form = document.querySelector('form');
+            return form.checkValidity() ? true :
+            form.reportValidity();
+        }
+    </script>
   </body>
 </html>
