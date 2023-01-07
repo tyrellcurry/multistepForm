@@ -189,6 +189,15 @@ nav .circle {
     padding-bottom: 2rem;
 }
 
+.summary-panel .summary .customer-info h2 {
+    font-weight: 500;
+    padding-bottom: .25rem;   
+}
+
+.summary-panel .summary .customer-info h3 {
+    padding-bottom: .1rem;   
+}
+
 /* Info-panel */
 .info-panel form {
     display: flex;

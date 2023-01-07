@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi-Step Form</title>
+    <title>Multi-Step Form | Tyrell Curry</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon-32x32.png">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <main>
-        <div x-data="{ activeTab: 'stepOne', isFormValidated: true, isMonthly: true, monthlyStyle: 'bold', isYearly: false, yearlyStyle: '', annualToggles: true, summaryPlan: 'advanced', onlineDisplay: false, storageDisplay: false, profileDisplay: false, steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false, monthlyTotal: 12, yearlyTotal: 90, addonsMonthlyTotal: 0, addonsYearlyTotal: 0, addons: {online: false, storage: false, profile: false}, plans: {arcade: true, advanced: false, pro: false},
+        <div x-data="{ activeTab: 'stepOne', isFormValidated: true, isMonthly: true, monthlyStyle: 'bold', isYearly: false, yearlyStyle: '', annualToggles: true, summaryPlan: 'advanced', onlineDisplay: false, storageDisplay: false, profileDisplay: false, steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false, monthlyTotal: 12, yearlyTotal: 90, addonsMonthlyTotal: 0, addonsYearlyTotal: 0, name: 'n/a', email: 'n/a', phone: 'n/a', infoFilled: false, addons: {online: false, storage: false, profile: false}, plans: {arcade: true, advanced: false, pro: false},
         log() {
             console.log($refs.profileCheckbox)
         },
@@ -21,7 +22,13 @@
         nextButton() {
             if(this.activeTab === 'stepOne' && !formValidation() && this.isFormValidated);
             else if(this.steps[this.steps.indexOf(this.activeTab) + 1] !== undefined){
-                    this.activeTab = this.steps[this.steps.indexOf(this.activeTab) + 1]
+                    $refs.inputName.value.length ? this.name = $refs.inputName.value : null;
+                    $refs.inputEmail.value.length ? this.email = $refs.inputEmail.value : null;
+                    $refs.inputPhone.value.length ? this.phone = $refs.inputPhone.value : null;
+                    this.activeTab = this.steps[this.steps.indexOf(this.activeTab) + 1];
+                    if($refs.inputName.value.length || $refs.inputEmail.value.length || $refs.inputPhone.value.length) {
+                        this.infoFilled = true;
+                    }
                     }
         },
         monthlyToggle() {
@@ -116,6 +123,7 @@
                 </div>
                 <div class="final" x-show="activeTab === 'stepFive'">
                     <p>Thanks for checking out this project showcasing <a href="https://alpinejs.dev/" target="_blank">AlpineJS</a>.</p><p>I hope you've enjoyed it!</p>
+                    <p>You can check out more projects from me by visiting my <a href="https://github.com/tyrellcurry" target="_blank">github</a>.</p>
                 </div>
             </nav>
             <div class="panels">
@@ -125,11 +133,11 @@
                         <p>Please provide your name, email address, and phone number.</p>
                         <form action="">
                             <label for="name">Name:</label>
-                            <input id="name" type="text" placeholder="Vanessa Mint" required>
+                            <input id="name" x-ref="inputName" type="text" placeholder="Vanessa Mint" required>
                             <label for="email">Email:</label>
-                            <input id="email" type="email" placeholder="vanessamint@email.com" required>
+                            <input id="email" x-ref="inputEmail" type="email" placeholder="vanessamint@email.com" required>
                             <label for="phone">Phone Number:</label>
-                            <input id="phone" type="phone" placeholder="(604)555-1234" required>
+                            <input id="phone" x-ref="inputPhone" type="phone" placeholder="(604)555-1234" required>
                         </form>
                     </div>
                     <div class="validation-toggle">
@@ -264,13 +272,13 @@
                             </p>
                         </div>                        
                         <div class="summary">
-                            <div class="customer-info">
+                            <div x-show="infoFilled" class="customer-info">
                                 <h2>Your Information:</h2>
-                                <h3>Vanessa Mint</h3>
-                                <h3>vanessa@email.com</h3>
-                                <h3>(604)555-1234</h3>
+                                <h3 x-text="`Name: ${name}`"></h3>
+                                <h3 x-text="`Email: ${email}`"></h3>
+                                <h3 x-text="`Phone: ${phone}`"></h3>
                             </div>
-                            <hr />
+                            <hr x-show="infoFilled" />
                             <div class="top">
                                 <div x-show="summaryPlan == 'arcade'" class="row">
                                     <div class="left">
