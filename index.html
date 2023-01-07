@@ -11,7 +11,10 @@
   </head>
   <body>
     <main>
-        <div x-data="{ activeTab: 'stepOne', isFormValidated: true, isMonthly: true, monthlyStyle: 'bold', isYearly: false, yearlyStyle: '', steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false, 
+        <div x-data="{ activeTab: 'stepOne', isFormValidated: true, isMonthly: true, monthlyStyle: 'bold', isYearly: false, yearlyStyle: '', annualToggles: true, summaryPlan: 'advanced', onlineDisplay: false, storageDisplay: false, profileDisplay: false, steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false, monthlyTotal: 12, yearlyTotal: 90, addonsMonthlyTotal: 0, addonsYearlyTotal: 0, addons: {online: false, storage: false, profile: false}, plans: {arcade: true, advanced: false, pro: false},
+        log() {
+            console.log($refs.profileCheckbox)
+        },
         validation() {
             this.isFormValidated = !this.isFormValidated;
         },
@@ -22,13 +25,51 @@
                     }
         },
         monthlyToggle() {
-            this.isMonthly ? (this.monthlyStyle = '', this.isMonthly = !this.isMonthly) : (this.monthlyStyle = 'bold', this.isMonthly = !this.isMonthly);
-            this.isYearly ? (this.yearlyStyle = '', this.isYearly = !this.isYearly) : (this.yearlyStyle = 'bold', this.isYearly = !this.isYearly);
+            this.annualToggles ? ($refs.firstToggle.checked = true, $refs.secondToggle.checked = true, this.annualToggles = !this.annualToggles) : ($refs.firstToggle.checked = false, $refs.secondToggle.checked = false, this.annualToggles = !this.annualToggles)
+
+            this.annualToggles ? (this.monthlyStyle = 'bold', this.yearlyStyle = '') : (this.monthlyStyle = '', this.yearlyStyle = 'bold');
+        },
+        salesTotal() {
+            this.addonsMonthlyTotal = 0;
+            this.addonsYearlyTotal = 0;
+            this.onlineDisplay = false;
+            this.storageDisplay = false;
+            this.profileDisplay = false;
+            if($refs.arcadeRadio.checked) {
+                this.summaryPlan = 'arcade';
+                this.monthlyTotal = 9;
+                this.yearlyTotal = 79;
+            }
+            else if($refs.advancedRadio.checked) {
+                this.summaryPlan = 'advanced';
+                this.monthlyTotal = 12;
+                this.yearlyTotal = 109;
+            }
+            else if($refs.proRadio.checked) {
+                this.summaryPlan = 'pro';
+                this.monthlyTotal = 15;
+                this.yearlyTotal = 139;
+            }
+            if($refs.onlineCheckbox.checked){
+                this.onlineDisplay = true;
+                this.addonsMonthlyTotal += 1;
+                this.addonsYearlyTotal += 12;
+            }
+            if($refs.storageCheckbox.checked){
+                this.storageDisplay = true;
+                this.addonsMonthlyTotal += 2;
+                this.addonsYearlyTotal += 24;
+            }
+            if($refs.profileCheckbox.checked){
+                this.profileDisplay = true;
+                this.addonsMonthlyTotal += 2;
+                this.addonsYearlyTotal += 24;
+            }
         }
-        }" x-init="console.log(steps)" class="container">
+        }" x-init="log()" class="container">
             <nav>
                 <div class="steps">
-                    <div x-on:click="activeTab = 'stepOne'" x-bind:class="activeTab === 'stepOne' && 'active'" class="step">
+                    <div x-bind:class="activeTab === 'stepOne' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 1
@@ -39,7 +80,7 @@
                             <p>Your Info</p>
                         </div>
                     </div>
-                    <div x-on:click="activeTab = 'stepTwo'" x-bind:class="activeTab === 'stepTwo' && 'active'" class="step">
+                    <div x-bind:class="activeTab === 'stepTwo' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 2
@@ -50,7 +91,7 @@
                             <p>Select Plan</p>
                         </div>
                     </div>
-                    <div x-on:click="activeTab = 'stepThree'" x-bind:class="activeTab === 'stepThree' && 'active'" class="step">
+                    <div x-bind:class="activeTab === 'stepThree' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 3
@@ -61,7 +102,7 @@
                             <p>Add-Ons</p>
                         </div>
                     </div>
-                    <div x-on:click="activeTab = 'stepFour'" x-bind:class="activeTab === 'stepFour' && 'active'" class="step">
+                    <div x-bind:class="activeTab === 'stepFour' && 'active'" class="step">
                         <div class="number">
                             <div class="circle">
                                 4
@@ -106,38 +147,38 @@
                         </p>
                         <label class="selection">
                             <label class="card">
-                                <input name="radio" class="radio" type="radio">
+                                <input x-ref="arcadeRadio" x-on:change="salesTotal()" name="radio" class="radio" type="radio">
                                 <div class="card_body">
                                     <div class="icon">
                                         <img src="./assets/images/icon-arcade.svg" alt="Arcade Icon">
                                     </div>
                                     <div class="text">
                                         <h6>Arcade</h6>
-                                        <p>$9/month</p>
+                                        <p x-text="annualToggles ? '$9/mo' : '$79/yr'"></p>
                                     </div>
                                 </div>
                             </label>
                             <label class="card">
-                                <input name="radio" class="radio" type="radio" checked>
+                                <input x-ref="advancedRadio" x-on:change="salesTotal()" name="radio" class="radio" type="radio" checked>
                                 <div class="card_body">
                                     <div class="icon">
                                         <img src="./assets/images/icon-advanced.svg" alt="Controler Icon">
                                     </div>
                                     <div class="text">
                                         <h6>Advanced</h6>
-                                        <p>$12/month</p>
+                                        <p x-text="annualToggles ? '$12/mo' : '$109/yr'"></p>
                                     </div>
                                 </div>
                             </label>
                             <label class="card">
-                                <input name="radio" class="radio" type="radio">
+                                <input x-ref="proRadio" x-on:change="salesTotal()" name="radio" class="radio" type="radio">
                                 <div class="card_body">
                                     <div class="icon">
                                         <img src="./assets/images/icon-pro.svg" alt="Controler Icon">
                                     </div>
                                     <div class="text">
                                         <h6>Pro</h6>
-                                        <p>$15/month</p>
+                                        <p x-text="annualToggles ? '$15/mo' : '$135/yr'"></p>
                                     </div>
                                 </div>
                             </label>
@@ -146,7 +187,7 @@
                         <div class="annual-toggle">
                             <h5 x-bind:class="monthlyStyle">Monthly</h5>
                             <div class="toggle">
-                                <input x-on:change="monthlyToggle()" type="checkbox"/>
+                                <input x-ref="firstToggle" x-on:change="monthlyToggle()" type="checkbox"/>
                                 <label></label>
                             </div>
                             <h5 x-bind:class="yearlyStyle">Yearly</h5>
@@ -163,7 +204,7 @@
                             </p>
                         </div>
                         <label class="card">
-                            <input name="checkbox" class="radio" type="checkbox">
+                            <input x-ref="onlineCheckbox" x-on:change="salesTotal()" name="checkbox" class="radio" type="checkbox">
                             <div class="checkbox_card_body">
                                 <div class="left">
                                     <div class="checkbox"></div>
@@ -178,7 +219,7 @@
                             </div>
                         </label>
                         <label class="card">
-                            <input name="checkbox" class="radio" type="checkbox">
+                            <input x-ref="storageCheckbox" x-on:change="salesTotal()" name="checkbox" class="radio" type="checkbox">
                             <div class="checkbox_card_body">
                                 <div class="left">
                                     <div class="checkbox"></div>
@@ -193,7 +234,7 @@
                             </div>
                         </label>
                         <label class="card">
-                            <input name="checkbox" class="radio" type="checkbox">
+                            <input x-ref="profileCheckbox" x-on:change="salesTotal()" name="checkbox" class="radio" type="checkbox">
                             <div class="checkbox_card_body">
                                 <div class="left">
                                     <div class="checkbox"></div>
@@ -221,32 +262,54 @@
                         </div>
                         <div class="summary">
                             <div class="top">
-                                <div class="row">
+                                <div x-show="summaryPlan == 'arcade'" class="row">
                                     <div class="left">
-                                        <h3>Arcade (Monthly)</h3>
+                                        <h3 x-text="annualToggles ? 'Arcade (Monthly)' : 'Arcade (Yearly)'"></h3>
                                         <div @click="popUp = true" class="change">Change</div>
                                     </div>
                                     <div class="right">
-                                        <h4>$9/mo</h4>
+                                        <h4 x-text="annualToggles ? '$9/mo' : '$90/yr'"></h4>
+                                    </div>
+                                </div>
+                                <div x-show="summaryPlan == 'advanced'" class="row">
+                                    <div class="left">
+                                        <h3>Advanced (Monthly)</h3>
+                                        <div @click="popUp = true" class="change">Change</div>
+                                    </div>
+                                    <div class="right">
+                                        <h4 x-text="annualToggles ? '$12/mo' : '$109/yr'"></h4>
+                                    </div>
+                                </div>
+                                <div x-show="summaryPlan == 'pro'" class="row">
+                                    <div class="left">
+                                        <h3>Pro (Monthly)</h3>
+                                        <div @click="popUp = true" class="change">Change</div>
+                                    </div>
+                                    <div class="right">
+                                        <h4 x-text="annualToggles ? '$15/mo' : '$139/yr'"></h4>
                                     </div>
                                 </div>
                             </div>
                             <hr />
                             <div class="bottom">
-                                <div class="row">
+                                <div x-show="onlineDisplay" class="row">
                                     <p>Online service</p>
-                                    <h5>+$1/mo</h5>
+                                    <h5 x-text="annualToggles ? '+$1/mo' : '+$12/yr'"></h5>
                                 </div>
-                                <div class="row">
+                                <div x-show="storageDisplay" class="row">
                                     <p>Larger Storage</p>
-                                    <h5>+$2/mo</h5>
+                                    <h5 x-text="annualToggles ? '+$2/mo' : '+$24/yr'"></h5>
+                                </div>
+                                <div x-show="profileDisplay" class="row">
+                                    <p>Customizable Profile</p>
+                                    <h5 x-text="annualToggles ? '+$2/mo' : '+$24/yr'"></h5>
                                 </div>
                             </div>
                         </div>
                         <div class="total">
                             <div class="row">
-                                <p>Total (per month)</p>
-                                <h3>$12/mo</h3>
+                                <p x-text="annualToggles ? 'Total (per month)' : 'Total (per year)' "></p>
+                                <h3 x-text="annualToggles ? `$${monthlyTotal + addonsMonthlyTotal}/mo` : `$${yearlyTotal + addonsYearlyTotal}/yr`"></h3>
                             </div>
                         </div>
                     </div>
@@ -279,12 +342,12 @@
                     <div class="content">
                         <h2>Change Payment Option</h2>
                         <div class="annual-toggle">
-                            <h5>Monthly</h5>
+                            <h5 x-bind:class="monthlyStyle">Monthly</h5>
                             <div class="toggle">
-                                <input type="checkbox"/>
+                                <input x-ref="secondToggle" x-on:change="monthlyToggle()" type="checkbox"/>
                                 <label></label>
                             </div>
-                            <h5>Yearly</h5>
+                            <h5 x-bind:class="yearlyStyle">Yearly</h5>
                         </div>
                     </div>
                 </div>

@@ -475,7 +475,7 @@ nav .circle {
     font-weight: 500;
 }
 
-.summary-panel .bottom .row:first-child {
+.summary-panel .bottom .row {
     padding-bottom: .85rem;
 }
 
