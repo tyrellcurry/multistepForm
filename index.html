@@ -11,7 +11,21 @@
   </head>
   <body>
     <main>
-        <div x-data="{ activeTab: 'stepOne', steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false}" x-init="console.log(steps)" class="container">
+        <div x-data="{ activeTab: 'stepOne', isFormValidated: true, isMonthly: true, monthlyStyle: 'bold', isYearly: false, yearlyStyle: '', steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false, 
+        validation() {
+            this.isFormValidated = !this.isFormValidated;
+        },
+        nextButton() {
+            if(this.activeTab === 'stepOne' && !formValidation() && this.isFormValidated);
+            else if(this.steps[this.steps.indexOf(this.activeTab) + 1] !== undefined){
+                    this.activeTab = this.steps[this.steps.indexOf(this.activeTab) + 1]
+                    }
+        },
+        monthlyToggle() {
+            this.isMonthly ? (this.monthlyStyle = '', this.isMonthly = !this.isMonthly) : (this.monthlyStyle = 'bold', this.isMonthly = !this.isMonthly);
+            this.isYearly ? (this.yearlyStyle = '', this.isYearly = !this.isYearly) : (this.yearlyStyle = 'bold', this.isYearly = !this.isYearly);
+        }
+        }" x-init="console.log(steps)" class="container">
             <nav>
                 <div class="steps">
                     <div x-on:click="activeTab = 'stepOne'" x-bind:class="activeTab === 'stepOne' && 'active'" class="step">
@@ -75,9 +89,9 @@
                         </form>
                     </div>
                     <div class="validation-toggle">
-                        <h3>Toggle Form Validation</h3>
-                        <div class="toggle">
-                            <input type="checkbox"/>
+                        <h3 x-text="isFormValidated ? 'Form Validation Enabled' : 'Form Validation Disabled'"></h3>
+                        <div x-on:change="validation()" class="toggle">
+                            <input type="checkbox" checked/>
                             <label></label>
                         </div>
                     </div>
@@ -130,12 +144,12 @@
                         </label>
                         </div>
                         <div class="annual-toggle">
-                            <h5>Monthly</h5>
+                            <h5 x-bind:class="monthlyStyle">Monthly</h5>
                             <div class="toggle">
-                                <input type="checkbox"/>
+                                <input x-on:change="monthlyToggle()" type="checkbox"/>
                                 <label></label>
                             </div>
-                            <h5>Yearly</h5>
+                            <h5 x-bind:class="yearlyStyle">Yearly</h5>
                         </div>
                 </div>
                 <div x-show="activeTab === 'stepThree'" class="addons-panel">
@@ -250,9 +264,7 @@
                     </div>
                     <button
                     @click="
-                    if(steps[steps.indexOf(activeTab) + 1] !== undefined){
-                    activeTab = steps[steps.indexOf(activeTab) + 1]
-                    }
+                    nextButton()
                     " 
                     class="next">
                         Next Step
