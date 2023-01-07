@@ -76,6 +76,20 @@ nav .steps {
     transition: height ease-in .125s;
 }
 
+nav .final {
+    padding: 2rem 1rem;
+}
+
+nav .final p {
+    color: var(--Sky-blue);
+    font-size: 1.15rem; 
+    padding-bottom: 1rem;      
+}
+
+nav .final a {
+    color: var(--Sky-blue);
+}
+
 nav .step {
     display: flex; 
     align-items: center;
@@ -162,7 +176,7 @@ nav .circle {
     color: var(--Navy-blue);
 }
 
-.info-panel h2, .select-panel h2, .addons-panel .title h2, .summary-panel .title h2 {
+.info-panel h2, .select-panel h2, .addons-panel .title h2, .summary-panel .title h2, .confirmation-panel .title h2 {
     padding-top: 2rem;  
     padding-bottom: .5rem;
     font-size: 2rem;
@@ -170,7 +184,7 @@ nav .circle {
     transition: padding-top ease-in .125s;
 }
 
-.info-panel p, .select-panel p, .addons-panel .title p, .summary-panel .title p {
+.info-panel p, .select-panel p, .addons-panel .title p, .summary-panel .title p, .confirmation-panel .title p {
     color: var(--Blue-gray);
     padding-bottom: 2rem;
 }
@@ -516,9 +530,8 @@ nav .circle {
     top: 5%;
     transform: translate(-50%);
     width: 100%;
-    height: 40%;
+    height: 60%;
     background-color: #D6D9E6;
-    
     filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
     border-radius: .75rem;
 }
@@ -530,6 +543,7 @@ nav .circle {
     justify-content: center;
     text-align: center;
     padding: 0 2rem;
+    overflow: auto;
 }
 
 .annual-modal > * {
@@ -558,6 +572,37 @@ nav .circle {
     fill: var(--Purple);
 }
 
+.annual-modal .selection .card_body {
+    background-color: var(--Light-blue-gray);
+    height: auto;
+}
+
+.annual-modal .radio:checked ~ .card_body {
+    background-color: var(--Pale-gray);
+}
+
+.annual-modal .selection .icon {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* Confirmation Panel */
+.confirmation-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.confirmation-panel .content {
+    text-align: center;
+}
+
+.confirmation-panel .content h2 {
+    padding-top: 1rem;
+    padding-bottom: .75rem;
+}
+
 
 /* Media Queries */
 @media (max-height: 610px) {
@@ -582,6 +627,9 @@ nav .circle {
     .info-panel form input {
         margin-top: .25rem;
         margin-bottom: 1rem;
+    }
+    .annual-modal {
+        height: 90%;
     }
   }
 
