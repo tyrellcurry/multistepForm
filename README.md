@@ -52,7 +52,7 @@ This was my first experience with Alpine.js. I really enjoyed being able to cont
 For example, I kept the state of the active tab within an `x-data` variable:
 
 ```html
-<div x-data="{ activeTab: 'stepOne' }</div>
+<div x-data="{ activeTab: 'stepOne' }"</div>
 ```
 This was used for routing and helped create the SPA experience.
 
