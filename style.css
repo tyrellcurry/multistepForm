@@ -616,7 +616,7 @@ nav .circle {
 
 
 /* Media Queries */
-@media only screen and (max-height: 610px) {
+@media only screen and (max-height: 640px) {
     nav .steps {
         height: 80%;
         transition: height ease-in .125s;
