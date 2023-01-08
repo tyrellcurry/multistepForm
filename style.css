@@ -88,12 +88,8 @@ video {
   vertical-align: baseline;
   box-sizing: border-box;
 }
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: transparent !important;
+* {
+    -webkit-tap-highlight-color: transparent;
 }
 /* End CSS Reset */
 
