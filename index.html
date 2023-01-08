@@ -13,9 +13,6 @@
   <body>
     <main>
         <div x-data="{ activeTab: 'stepOne', isFormValidated: true, isMonthly: true, monthlyStyle: 'bold', isYearly: false, yearlyStyle: '', annualToggles: true, summaryPlan: 'advanced', onlineDisplay: false, storageDisplay: false, profileDisplay: false, steps: ['stepOne', 'stepTwo', 'stepThree', 'stepFour'], popUp: false, monthlyTotal: 12, yearlyTotal: 90, addonsMonthlyTotal: 0, addonsYearlyTotal: 0, name: 'n/a', email: 'n/a', phone: 'n/a', infoFilled: false, addons: {online: false, storage: false, profile: false}, plans: {arcade: true, advanced: false, pro: false},
-        log() {
-            console.log($refs.profileCheckbox)
-        },
         validation() {
             this.isFormValidated = !this.isFormValidated;
         },
