@@ -1,7 +1,7 @@
 # Multi-step form built with Alpine.js
 
 This is an interactive and dynamic multi-step form showcasing the power of the frontend framework: [Alpine.js](https://alpinejs.dev/).
-<br>You can view the live deployment [here](https://multistep-form-tc.netlify.app/).
+<br>You can view the live deployment ✨ [here](https://multistep-form-tc.netlify.app/) ✨.
 
 ## Table of contents
 
