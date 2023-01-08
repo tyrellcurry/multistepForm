@@ -725,13 +725,6 @@ nav .circle {
     overflow: auto;
     min-height: 50px;
   }
-  .info-panel h2 {
-    padding-top: 0;
-    padding-bottom: 0.5rem;
-  }
-  .info-panel p {
-    padding-bottom: 0.75rem;
-  }
   .info-panel form input {
     margin-top: 0.25rem;
     margin-bottom: 1rem;
